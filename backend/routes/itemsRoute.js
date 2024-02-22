@@ -1,17 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const item = require('../models/itemModel')
-
+const upload = multer({ dest: '../images' });
 
 //add new items
-router.post("/add/item", async (req, res) => {
-  const { sku,newName, newPrices, newImages, newDescription,newQty } = req.body;
-
+router.post("/add/item", upload.array('productImages', 5), async (req, res) => {
+  const { sku,newName, newPrices, newDescription,newQty } = req.body;
+  const newImages = req.files.map(file => file.path);
   try {
       const items = new item({
         sku : sku,
         name : newName,
-        images : newImages,
         description : newDescription,
         prices : newPrices,
         qty : newQty
