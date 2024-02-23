@@ -4,6 +4,8 @@ const cors = require("cors");
 
 const item = require('./models/itemModel')
 const Admin = require('./models/adminModel')
+const path = require('path');
+
 
 
 
@@ -22,6 +24,7 @@ const adminRoute = require('./routes/adminRoute')
 
 app.use('/api/items/', itemRoute)
 app.use('/api/admins/', adminRoute)
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 app.get("/", (req, res) => {

@@ -13,7 +13,7 @@ const itemSchema = mongoose.Schema({
     price: {
         type: String,
     },
-    image: {
+    images: {
         type: [String],
         
     },
@@ -28,6 +28,9 @@ const itemSchema = mongoose.Schema({
     isFavourite: {
         type: Boolean,
         
+    },
+    thumbnail:{
+        type: Number,
     }
 }, {
     timestamps: true,
