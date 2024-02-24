@@ -135,6 +135,24 @@ router.post("/updateFavorites", async (req, res) => {
   }
 });
 
+
+// route to handle search requests
+router.get('/search', async (req, res) => {
+    const searchTerm = req.query.term;
+  
+    try {
+      // Perform a database query to find items matching the search term
+      const searchResults = await item.find({ name: { $regex: searchTerm, $options: 'i' } });
+      
+      // Send the search results back to the client
+      res.json(searchResults);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+      res.status(500).json({ error: 'An error occurred while fetching search results' });
+    }
+  });
+  
+
   
   
 
